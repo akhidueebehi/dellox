@@ -1,113 +1,383 @@
-import Image from 'next/image'
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { BiSearchAlt } from "react-icons/bi";
+import { BiUser } from "react-icons/bi";
+import { BiShoppingBag } from "react-icons/bi";
+import logo from "../../assets/logo.jpg";
+import ItemFormat from "./itemFormat";
+import watchListing from "./watchListing";
+import reportNumbers from "./reportNo";
+import { useRef } from "react";
 
 export default function Home() {
+  const [openMenu, setOpenMenu] = useState(false);
+  const [repValue, setRepValue] = useState();
+  const [scrollY, setScrollY] = useState(0);
+  const [reportInput, setReportInput] = useState();
+  const [reportMessage, setReportMessage] = useState("");
+  const watchRef = useRef(null);
+  const braceletRef = useRef(null);
+  const pendantRef = useRef(null);
+  const earringRef = useRef(null);
+  const accessoryRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="font-lato overflow-hidden">
+      <div
+        className={`fixed top-0 ${
+          openMenu
+            ? "left-0 transition-all duration-300"
+            : "-left-[100%] transition-all duration-300"
+        } z-40 text-[16px] font-serif font-semibold bg-black text-white w-full h-full flex lg:hidden items-center justify-center flex-col`}
+      >
+        <div
+          className="m-[12px]"
+          onClick={() => {
+            setOpenMenu(false);
+            watchRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          WATCHES {">"}
+        </div>
+        <div
+          className="m-[12px]"
+          onClick={() => {
+            setOpenMenu(false);
+            braceletRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          BRACELETS {">"}
+        </div>
+        <div
+          className="m-[12px]"
+          onClick={() => {
+            setOpenMenu(false);
+            pendantRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          PENDANTS {">"}
+        </div>
+        <div
+          className="m-[12px]"
+          onClick={() => {
+            setOpenMenu(false);
+            earringRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          EARRINGS {">"}
+        </div>
+        <div
+          className="m-[12px]"
+          onClick={() => {
+            setOpenMenu(false);
+            accessoryRef.current?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          ACCESSORIES {">"}
+        </div>
+        <div className="m-[12px]">
+          <Link href="">CUSTOM {">"}</Link>
+        </div>
+        <div className="m-[12px]">
+          <Link href="">CONTACT {">"}</Link>
+        </div>
+        <div className="m-[12px]">
+          <Link href="">SERVICES {">"}</Link>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div
+        className={`flex flex-col fixed z-50 left-[5vw] ${
+          scrollY < 100
+            ? "top-[30px] transition-all duration-300"
+            : "top-[20px] transition-all duration-300"
+        } lg:hidden items-start justify-center`}
+        onClick={() => setOpenMenu(!openMenu)}
+      >
+        <div
+          className={`w-[23px] md:w-[30px] ${
+            openMenu
+              ? " -rotate-45 -translate-x-[8px] md:-translate-x-[10px] transition-all duration-300 bg-white"
+              : "transition-all duration-300 bg-black"
+          } h-[2px] md:h-[3px] m-[2px] md:m-[2px]`}
+        ></div>
+        <div
+          className={`w-[23px] md:w-[30px] ${
+            openMenu
+              ? "rotate-45 translate-x-[8px] md:translate-x-[10px] -translate-y-[6px] transition-all duration-300 bg-white"
+              : "transition-all duration-300 bg-black"
+          } h-[2px] md:h-[3px] m-[2px] md:m-[2px]`}
+        ></div>
+        <div
+          className={`w-[23px] md:w-[30px] ${
+            openMenu
+              ? "rotate-45 -translate-x-[8px] md:-translate-x-[10px] translate-y-[4px] md:translate-y-[6px] transition-all duration-300 bg-white"
+              : "transition-all duration-300 bg-black"
+          } h-[2px] md:h-[3px] m-[2px] md:m-[2px]`}
+        ></div>
+        <div
+          className={`w-[23px] md:w-[30px] ${
+            openMenu
+              ? "-rotate-45 translate-x-[8px] md:translate-x-[10px] -translate-y-[2px] md:-translate-y-[0px] transition-all duration-300 bg-white"
+              : "transition-all duration-300 bg-black"
+          } h-[2px] md:h-[3px] m-[2px] md:m-[2px]`}
+        ></div>
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className={`fixed top-0 w-full z-10`}>
+        <div
+          className={`text-[16px] bg-white flex justify-between items-center ${
+            scrollY < 100
+              ? "py-[30px] transition-all duration-300"
+              : "py-[20px] lg:py-[10px] transition-all duration-300"
+          } px-[5vw] border-b-black border-b-[1px]`}
         >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <div className="hidden lg:flex w-[25vw] items-center justify-start">
+            <div className="px-[10px]">
+              <Link href="">Custom</Link>
+            </div>
+            <div className="px-[10px]">
+              <Link href="">Contact</Link>
+            </div>
+            <div className="px-[10px]">
+              <Link href="">Services</Link>
+            </div>
+          </div>
+          <div className="ml-[5vw] md:ml-0 w-[45vw] lg:w-[25vw] flex items-center justify-center">
+            <Image
+              src={logo}
+              alt="delloxLogo"
+              className="w-[110px] md:w-[150px] lg:w-[200px]"
+            />
+          </div>
+          <div className=" w-[45vw] lg:w-[25vw] flex items-center justify-end">
+            <div className="px-[5px] md:px-[15px]">
+              <BiSearchAlt className="text-[20px] md:text-[25px]" />
+            </div>
+            <div className="px-[5px] md:px-[15px]">
+              <BiUser className="text-[20px] md:text-[25px]" />
+            </div>
+            <div className="px-[5px] md:px-[15px]">
+              <BiShoppingBag className="text-[20px] md:text-[25px]" />
+            </div>
+          </div>
+        </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+        <div className="hidden lg:flex font-serif items-center text-[14px] justify-center w-full bg-black text-white">
+          <button
+            className="py-[15px] px-[25px]"
+            onClick={() => {
+              watchRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            WATCHES
+          </button>
+          <button
+            className="py-[15px] px-[25px]"
+            onClick={() => {
+              braceletRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            BRACELETS
+          </button>
+          <button
+            className="py-[15px] px-[25px]"
+            onClick={() => {
+              pendantRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            PENDANTS
+          </button>
+          <button
+            className="py-[15px] px-[25px]"
+            onClick={() => {
+              earringRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            EARRINGS
+          </button>
+          <button
+            className="py-[15px] px-[25px]"
+            onClick={() => {
+              accessoryRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            ACCESSORIES
+          </button>
+        </div>
+      </div>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      <div className="heroSection mt-[80px] lg:mt-[135px] h-[50vh] md:h-[80vh] pt-[50px] p-[20px] w-full flex flex-col items-center justify-center text-white">
+        <div className="italic md:text-[18px] text-[14px]">
+          elegance redefined...
+        </div>
+        <div className="lg:text-[72px] text-[28px] font-serif font-semibold text-center">
+          WELCOME TO DELLOX
+        </div>
+        <div className="mt-[30px] md:mt-[80px]">
+          <Link
+            href=""
+            className="border-[1px] border-white p-[15px] md:p-[20px] hover:bg-white hover:text-black font-semibold transition-all duration-150"
+          >
+            Shop Now
+          </Link>
+        </div>
+      </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div ref={watchRef} className="watches lg:pt-[150px] pt-[90px] pb-[20px]">
+        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
+          WATCHES {">"}
+        </div>
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
+          {watchListing.map((watch, index) => {
+            return (
+              <ItemFormat
+                Img={watch.Image}
+                OldPrice={watch.OldPrice}
+                NewPrice={watch.NewPrice}
+                Name={watch.Name}
+                key={JSON.stringify(watch.Image)}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        ref={braceletRef}
+        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+      >
+        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
+          BRACELETS {">"}
+        </div>
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
+          {watchListing.map((watch, index) => {
+            return (
+              <ItemFormat
+                Img={watch.Image}
+                OldPrice={watch.OldPrice}
+                NewPrice={watch.NewPrice}
+                Name={watch.Name}
+                key={JSON.stringify(watch.Image)}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        ref={pendantRef}
+        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+      >
+        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
+          PENDANTS {">"}
+        </div>
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
+          {watchListing.map((watch, index) => {
+            return (
+              <ItemFormat
+                Img={watch.Image}
+                OldPrice={watch.OldPrice}
+                NewPrice={watch.NewPrice}
+                Name={watch.Name}
+                key={JSON.stringify(watch.Image)}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        ref={earringRef}
+        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+      >
+        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
+          EARRINGS {">"}
+        </div>
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
+          {watchListing.map((watch, index) => {
+            return (
+              <ItemFormat
+                Img={watch.Image}
+                OldPrice={watch.OldPrice}
+                NewPrice={watch.NewPrice}
+                Name={watch.Name}
+                key={JSON.stringify(watch.Image)}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        ref={accessoryRef}
+        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+      >
+        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
+          ACCESSORIES {">"}
+        </div>
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
+          {watchListing.map((watch, index) => {
+            return (
+              <ItemFormat
+                Img={watch.Image}
+                OldPrice={watch.OldPrice}
+                NewPrice={watch.NewPrice}
+                Name={watch.Name}
+                key={JSON.stringify(watch.Image)}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col items-center justify-center mb-[50px] border-t-[1px] border-[#cccccc] pt-[50px]">
+        <div className="font-semibold bg-[#dddddd] py-[15px] px-[55px]">
+          DELLOX REPORT CHECK
+        </div>
+        <div className="flex items-center justify-center mt-[30px]">
+          <input
+            placeholder="Dellox Report No."
+            className="border-[1px] py-[15px] px-[5px] border-[#cccccc]"
+            value={reportInput}
+            onChange={(e) => {
+              setReportInput(e.target.value);
+            }}
+          />
+          <div
+            className="font-semibold bg-[#dddddd] p-[15px] ml-[15px] border-[1px] border-[#cccccc]"
+            onClick={() => {
+              if (reportNumbers.includes(reportInput)) {
+                setReportMessage("This Product is from Dellox");
+                setRepValue(true);
+              } else {
+                setReportMessage(
+                  "Sorry, this Product does not belong to Dellox"
+                );
+                setRepValue(false);
+              }
+            }}
+          >
+            GO
+          </div>
+        </div>
+        <div className={`mt-4 ${repValue ? " text-green-700" : " text-red-700"}`}>{reportMessage}</div>
       </div>
     </main>
-  )
+  );
 }
