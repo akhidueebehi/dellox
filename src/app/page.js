@@ -2,9 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BiSearchAlt } from "react-icons/bi";
-import { BiUser } from "react-icons/bi";
-import { BiShoppingBag } from "react-icons/bi";
+import { LuSearchCheck } from "react-icons/lu";
 import logo from "../../assets/logo.jpg";
 import ItemFormat from "./itemFormat";
 import watchListing from "./watchListing";
@@ -90,22 +88,13 @@ export default function Home() {
         >
           ACCESSORIES {">"}
         </div>
-        <div className="m-[12px]">
-          <Link href="">CUSTOM {">"}</Link>
-        </div>
-        <div className="m-[12px]">
-          <Link href="">CONTACT {">"}</Link>
-        </div>
-        <div className="m-[12px]">
-          <Link href="">SERVICES {">"}</Link>
-        </div>
       </div>
 
       <div
-        className={`flex flex-col fixed z-50 left-[5vw] ${
+        className={`flex flex-col fixed z-50 left-[7vw] ${
           scrollY < 100
-            ? "top-[30px] transition-all duration-300"
-            : "top-[20px] transition-all duration-300"
+            ? "top-[25px] transition-all duration-300 ease-in"
+            : "top-[15px] transition-all duration-300 ease-in"
         } lg:hidden items-start justify-center`}
         onClick={() => setOpenMenu(!openMenu)}
       >
@@ -143,20 +132,11 @@ export default function Home() {
         <div
           className={`text-[16px] bg-white flex justify-between items-center ${
             scrollY < 100
-              ? "py-[30px] transition-all duration-300"
-              : "py-[20px] lg:py-[10px] transition-all duration-300"
-          } px-[5vw] border-b-black border-b-[1px]`}
+              ? "py-[25px] transition-all duration-300 ease-in"
+              : "py-[15px] lg:py-[10px] transition-all duration-300 ease-in"
+          } px-[7vw] border-b-black border-b-[1px]`}
         >
-          <div className="hidden lg:flex w-[25vw] items-center justify-start">
-            <div className="px-[10px]">
-              <Link href="">Custom</Link>
-            </div>
-            <div className="px-[10px]">
-              <Link href="">Contact</Link>
-            </div>
-            <div className="px-[10px]">
-              <Link href="">Services</Link>
-            </div>
+          <div className="hidden lg:flex w-[25vw]">
           </div>
           <div className="ml-[5vw] md:ml-0 w-[45vw] lg:w-[25vw] flex items-center justify-center">
             <Image
@@ -165,16 +145,8 @@ export default function Home() {
               className="w-[110px] md:w-[150px] lg:w-[200px]"
             />
           </div>
-          <div className=" w-[45vw] lg:w-[25vw] flex items-center justify-end">
-            <div className="px-[5px] md:px-[15px]">
-              <BiSearchAlt className="text-[20px] md:text-[25px]" />
-            </div>
-            <div className="px-[5px] md:px-[15px]">
-              <BiUser className="text-[20px] md:text-[25px]" />
-            </div>
-            <div className="px-[5px] md:px-[15px]">
-              <BiShoppingBag className="text-[20px] md:text-[25px]" />
-            </div>
+          <div className=" w-[45vw] text-[24px] lg:text-[28px] lg:w-[25vw] flex items-center justify-end">
+            <LuSearchCheck/>
           </div>
         </div>
 
@@ -222,7 +194,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="heroSection mt-[80px] lg:mt-[135px] h-[50vh] md:h-[80vh] pt-[50px] p-[20px] w-full flex flex-col items-center justify-center text-white">
+      <div className="heroSection mt-[50px] lg:mt-[100px] h-[50vh] md:h-[90vh] pt-[50px] p-[20px] w-full flex flex-col items-center justify-center text-white">
         <div className="italic md:text-[18px] text-[14px]">
           elegance redefined...
         </div>
