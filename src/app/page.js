@@ -367,31 +367,34 @@ export default function Home() {
         <div className="flex items-center justify-center mt-[30px]">
           <input
             placeholder="Dellox Report No."
-            className="border-[1px] py-[15px] px-[5px] border-[#cccccc]"
+            className="border-[1px] py-[15px] px-[5px] border-white bg-white text-black"
             value={reportInput}
             onChange={(e) => {
               setReportInput(e.target.value);
             }}
           />
-          <div
-            className="font-semibold text-black bg-[#dddddd] p-[15px] ml-[38px] border-[1px] border-[#cccccc]"
+          <button
+            className="font-semibold text-white p-[15px] hover:text-black hover:bg-white transition-all duration-200 ml-[38px] border-[1px] border-white"
             onClick={() => {
               if (reportNumbers.includes(reportInput)) {
                 setReportMessage("This Product is from Dellox");
                 setRepValue(true);
               } else {
                 setReportMessage(
-                  "Sorry, this Product does not belong to Dellox"
+                  "Sorry, the Product's Report Number does not appear on Dellox's database"
                 );
+                setTimeout(() => {
+                  setReportMessage("");
+                }, 5000)
                 setRepValue(false);
               }
             }}
           >
             GO
-          </div>
+          </button>
         </div>
         <div
-          className={`mt-4 ${repValue ? " text-green-700" : " text-red-700"}`}
+          className={`mt-4 ${repValue ? " text-green-500" : " text-red-500"}`}
         >
           {reportMessage}
         </div>
