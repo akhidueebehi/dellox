@@ -6,6 +6,10 @@ import { LuSearchCheck } from "react-icons/lu";
 import logo from "../../assets/logo.jpg";
 import ItemFormat from "./itemFormat";
 import watchListing from "./watchListing";
+import braceletListing from "./braceletListing";
+import pendantListing from "./pendantListing";
+import earringListing from "./earringListing";
+import accessoryListing from "./accessoryListing";
 import reportNumbers from "./reportNo";
 import { useRef } from "react";
 
@@ -20,6 +24,7 @@ export default function Home() {
   const pendantRef = useRef(null);
   const earringRef = useRef(null);
   const accessoryRef = useRef(null);
+  const reportRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +46,7 @@ export default function Home() {
           openMenu
             ? "left-0 transition-all duration-300"
             : "-left-[100%] transition-all duration-300"
-        } z-40 text-[16px] font-serif font-semibold bg-black text-white w-full h-full flex lg:hidden items-center justify-center flex-col`}
+        } z-40 text-[16px] font-serif font-semibold bg-[#000000ee] text-white w-full h-full flex lg:hidden items-center justify-center flex-col`}
       >
         <div
           className="m-[12px]"
@@ -136,8 +141,7 @@ export default function Home() {
               : "py-[15px] lg:py-[10px] transition-all duration-300 ease-in"
           } px-[7vw] border-b-black border-b-[1px]`}
         >
-          <div className="hidden lg:flex w-[25vw]">
-          </div>
+          <div className="hidden lg:flex w-[25vw]"></div>
           <div className="ml-[5vw] md:ml-0 w-[45vw] lg:w-[25vw] flex items-center justify-center">
             <Image
               src={logo}
@@ -146,7 +150,11 @@ export default function Home() {
             />
           </div>
           <div className=" w-[45vw] text-[24px] lg:text-[28px] lg:w-[25vw] flex items-center justify-end">
-            <LuSearchCheck/>
+            <LuSearchCheck
+              onClick={() => {
+                reportRef.current?.scrollIntoView({ behavior: "smooth" });
+              }}
+            />
           </div>
         </div>
 
@@ -194,32 +202,25 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="heroSection mt-[50px] lg:mt-[100px] h-[50vh] md:h-[90vh] pt-[50px] p-[20px] w-full flex flex-col items-center justify-center text-white">
-        <div className="italic md:text-[18px] text-[14px]">
-          elegance redefined...
-        </div>
-        <div className="lg:text-[72px] text-[28px] font-serif font-semibold text-center">
+      <div className="heroSection mt-[50px] lg:mt-[100px] h-[40vh] md:h-[90vh] pt-[50px] p-[20px] w-full flex flex-col items-center justify-center text-white">
+        <div className="lg:text-[64px] drop-shadow-sm md:text-[40px] text-[24px] font-serif font-semibold text-center">
           WELCOME TO DELLOX
         </div>
-        <div className="mt-[30px] md:mt-[80px]">
-          <Link
-            href=""
-            className="border-[1px] border-white p-[15px] md:p-[20px] hover:bg-white hover:text-black font-semibold transition-all duration-150"
-          >
-            Shop Now
-          </Link>
+        <div className="italic drop-shadow-sm md:text-[20px] text-[14px]">
+          ...Elegance Redefined
         </div>
       </div>
 
-      <div ref={watchRef} className="watches lg:pt-[150px] pt-[90px] pb-[20px]">
-        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
-          WATCHES {">"}
+      <div ref={watchRef} className="lg:pt-[60px] pt-[30px] pb-[20px]">
+        <div className="text-[18px] lg:text-[24px] ml-[7vw] lg:mb-0 mb-6 font-semibold font-serif">
+          WATCHES
         </div>
-        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
+        <div className="mx-[5vw] mt-[2vw] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 place-items-center ">
           {watchListing.map((watch, index) => {
             return (
               <ItemFormat
                 Img={watch.Image}
+                Img2={watch.Image2}
                 OldPrice={watch.OldPrice}
                 NewPrice={watch.NewPrice}
                 Name={watch.Name}
@@ -227,21 +228,30 @@ export default function Home() {
               />
             );
           })}
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <Link
+            href=""
+            className=" text-[16px] font-semibold border-2 mt-[2vw] mb-[5vw] border-black p-[10px] hover:bg-black hover:text-white transition-all duration-200"
+          >
+            SHOP NOW
+          </Link>
         </div>
       </div>
 
       <div
         ref={braceletRef}
-        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+        className="lg:pt-[60px] pt-[30px] pb-[20px] bg-black text-white"
       >
-        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
-          BRACELETS {">"}
+        <div className="text-[18px] lg:text-[24px] ml-[7vw] lg:mb-0 mb-6 font-semibold font-serif">
+          BRACELETS
         </div>
-        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
-          {watchListing.map((watch, index) => {
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 place-items-center ">
+          {braceletListing.map((watch, index) => {
             return (
               <ItemFormat
                 Img={watch.Image}
+                Img2={watch.Image2}
                 OldPrice={watch.OldPrice}
                 NewPrice={watch.NewPrice}
                 Name={watch.Name}
@@ -249,21 +259,27 @@ export default function Home() {
               />
             );
           })}
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <Link
+            href=""
+            className=" text-[16px] font-semibold border-2 mt-[2vw] mb-[5vw] border-white p-[10px] hover:bg-white hover:text-black transition-all duration-200"
+          >
+            SHOP NOW
+          </Link>
         </div>
       </div>
 
-      <div
-        ref={pendantRef}
-        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
-      >
-        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
-          PENDANTS {">"}
+      <div ref={pendantRef} className="lg:pt-[60px] pt-[30px] pb-[20px]">
+        <div className="text-[18px] lg:text-[24px] ml-[7vw] lg:mb-0 mb-6 font-semibold font-serif">
+          PENDANTS
         </div>
-        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
-          {watchListing.map((watch, index) => {
+        <div className="mx-[5vw] mt-[2vw] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 place-items-center ">
+          {pendantListing.map((watch, index) => {
             return (
               <ItemFormat
                 Img={watch.Image}
+                Img2={watch.Image2}
                 OldPrice={watch.OldPrice}
                 NewPrice={watch.NewPrice}
                 Name={watch.Name}
@@ -271,21 +287,30 @@ export default function Home() {
               />
             );
           })}
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <Link
+            href=""
+            className=" text-[16px] font-semibold border-2 mt-[2vw] mb-[5vw] border-black p-[10px] hover:bg-black hover:text-white transition-all duration-200"
+          >
+            SHOP NOW
+          </Link>
         </div>
       </div>
 
       <div
         ref={earringRef}
-        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+        className="lg:pt-[60px] pt-[30px] pb-[20px] bg-black text-white"
       >
-        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
-          EARRINGS {">"}
+        <div className="text-[18px] lg:text-[24px] ml-[7vw] lg:mb-0 mb-6 font-semibold font-serif">
+          EARRINGS
         </div>
-        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
-          {watchListing.map((watch, index) => {
+        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 place-items-center ">
+          {earringListing.map((watch, index) => {
             return (
               <ItemFormat
                 Img={watch.Image}
+                Img2={watch.Image2}
                 OldPrice={watch.OldPrice}
                 NewPrice={watch.NewPrice}
                 Name={watch.Name}
@@ -293,33 +318,50 @@ export default function Home() {
               />
             );
           })}
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <Link
+            href=""
+            className=" text-[16px] font-semibold border-2 mt-[2vw] mb-[5vw] border-white p-[10px] hover:bg-white hover:text-black transition-all duration-200"
+          >
+            SHOP NOW
+          </Link>
+        </div>
+      </div>
+
+      <div ref={accessoryRef} className="lg:pt-[60px] pt-[30px] pb-[20px]">
+        <div className="text-[18px] lg:text-[24px] ml-[7vw] lg:mb-0 mb-6 font-semibold font-serif">
+          ACCESSORIES
+        </div>
+        <div className="mx-[5vw] mt-[2vw] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 place-items-center ">
+          {accessoryListing.map((watch, index) => {
+            return (
+              <ItemFormat
+                Img={watch.Image}
+                Img2={watch.Image2}
+                OldPrice={watch.OldPrice}
+                NewPrice={watch.NewPrice}
+                Name={watch.Name}
+                key={JSON.stringify(watch.Image)}
+              />
+            );
+          })}
+        </div>
+        <div className="w-full flex items-center justify-center">
+          <Link
+            href=""
+            className=" text-[16px] font-semibold border-2 mt-[2vw] mb-[5vw] border-black p-[10px] hover:bg-black hover:text-white transition-all duration-200"
+          >
+            SHOP NOW
+          </Link>
         </div>
       </div>
 
       <div
-        ref={accessoryRef}
-        className="watches lg:pt-[150px] pt-[90px] pb-[20px]"
+        ref={reportRef}
+        className="w-full bg-black text-white flex flex-col items-center justify-center pb-[50px] border-t-[1px] border-[#cccccc] pt-[50px]"
       >
-        <div className="text-[18px] lg:text-[20px] ml-[3vw] lg:mb-0 mb-6 font-semibold font-serif">
-          ACCESSORIES {">"}
-        </div>
-        <div className="watchListing mx-[5vw] mt-[2vw] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 place-items-center ">
-          {watchListing.map((watch, index) => {
-            return (
-              <ItemFormat
-                Img={watch.Image}
-                OldPrice={watch.OldPrice}
-                NewPrice={watch.NewPrice}
-                Name={watch.Name}
-                key={JSON.stringify(watch.Image)}
-              />
-            );
-          })}
-        </div>
-      </div>
-
-      <div className="w-full flex flex-col items-center justify-center mb-[50px] border-t-[1px] border-[#cccccc] pt-[50px]">
-        <div className="font-semibold bg-[#dddddd] py-[15px] px-[55px]">
+        <div className="font-semibold border-2 border-white py-[15px] px-[55px]">
           DELLOX REPORT CHECK
         </div>
         <div className="flex items-center justify-center mt-[30px]">
@@ -332,7 +374,7 @@ export default function Home() {
             }}
           />
           <div
-            className="font-semibold bg-[#dddddd] p-[15px] ml-[15px] border-[1px] border-[#cccccc]"
+            className="font-semibold text-black bg-[#dddddd] p-[15px] ml-[38px] border-[1px] border-[#cccccc]"
             onClick={() => {
               if (reportNumbers.includes(reportInput)) {
                 setReportMessage("This Product is from Dellox");
@@ -348,7 +390,11 @@ export default function Home() {
             GO
           </div>
         </div>
-        <div className={`mt-4 ${repValue ? " text-green-700" : " text-red-700"}`}>{reportMessage}</div>
+        <div
+          className={`mt-4 ${repValue ? " text-green-700" : " text-red-700"}`}
+        >
+          {reportMessage}
+        </div>
       </div>
     </main>
   );
